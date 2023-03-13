@@ -1,33 +1,44 @@
-import { useState,useEffect } from "react"
-import { FetchReviews } from "./api-requests"
+import { useState, useEffect } from "react";
+import { fetchReviews } from "./api-requests";
 
-const DisplayReviews = (sortby, ) => {
+const DisplayReviews = (sortby) => {
+  const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [reviews, SetReviews] = useState([])
+  useEffect(() => {
+    setIsLoading(true);
+    fetchReviews().then((response) => {
+        setIsLoading(false)
+      return setReviews(response.reviews);
+    });
+  }, [sortby]);
 
-    useEffect(() => {
-        FetchReviews().then((response) => SetReviews(response.reviews))
-    }, [sortby])
-    
-    
-    return (
-        <div className="display_reviews_container" tabIndex="3">
-            {reviews.map((review, index) => {
-                return (
-                    
-                    <div className="review_item_card" tabIndex={index + 4}>
-                        <img className="review_img" src={review.review_img_url} alt="an image of a board game mentioned in the review"/>
-                        <div className="review_list_info_container"> 
-                        <h5>{review.title}</h5> 
-                        <p>Votes: {review.votes}</p>
-                        </div>
-                        
-                    </div>
-                )
-            })}
-            
-        </div>
-    )
-}
+  return isLoading ? (<h1>Loading...</h1> ) : (
+    <ul className="display_reviews_container" tabIndex="3">
+      {reviews.map((review, index) => {
+        return (
+          <li
+            className="review_item_card"
+            tabIndex={index + 4}
+            key={`review_${index}`}
+          >
+            <img
+              className="review_img"
+              src={review.review_img_url}
+              alt={review.title}
+            />
+            <div className="review_list_info_container">
+              <h5>{review.title}</h5>
+              <p>Votes: {review.votes}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
 
-export default DisplayReviews
+   
+  
+};
+
+export default DisplayReviews;
