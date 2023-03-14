@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 95%;
+  width: 100%;
   height: 90%;
 }
 
@@ -102,4 +102,72 @@
   margin: 10px;
 
 }
+
+#commentpage_review_info {
+  display: flex;
+  text-align: right;
+  flex-direction: column;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black; ;
+  height: 30%;
+  margin-bottom: 5px;
+}
+
+
+#commentpage_review_content {
+  display: flex;
+  text-align: right;
+  flex-direction: row;
+  height: 80%;
+}
+
+
+
+#commentpage_review_info > h1 {
+  align-self: center;
+  font-size: large;
+}
+#commentreviewboxinfo {
+  margin-right: 2%;
+}
+
+#commentreviewboxinfo > h2 {
+  font-size: medium;
+}
+#commentreviewboxinfo > h3 {
+  font-size: medium;
+}
+#commentpage_review_content > img {
+  width: 60%;
+  max-width: 400px;
+}
+
+
+
+
+
+.comment_card {
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  border: 2px solid black;
+  border-radius: 10px;
+  color: aliceblue;
+  background-color: #4c00ff;
+  margin-bottom: 2%;
+  width: 95%;
+  height: fit-content
+}
+
+.comment_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 0;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+}
+
+
 

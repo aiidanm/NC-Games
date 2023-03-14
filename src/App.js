@@ -4,6 +4,7 @@ import HomeButtons from './components/buttons';
 import ReviewsPage from './components/reviewsPage';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import ViewReview from './components/viewReview';
+import ReviewsComments from './components/reviewsComments';
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
         <Route path='/categories' element={<Header/>}/>
         <Route path='/reviews' element={<><Header/> <ReviewsPage /> </>}/>
         <Route path='/reviews/:review_id' element={<><Header /> <ViewReview /> </>}/>
-        <Route path='/reviews/:review_id/comments' element={<><Header/></>}/>
+        <Route path='/reviews/:review_id/comments' element={<><Header/> <ReviewsComments/></>}/>
       </Routes>
     </div>
   );

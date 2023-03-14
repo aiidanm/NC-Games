@@ -18,7 +18,7 @@ const ViewReview = () => {
   const handleClick = (e) => {};
 
   return loading ? (
-    <h1>Loading..</h1>
+    <h2>Loading..</h2>
   ) : (
     <div className="single_review_container">
       <div className="single_review_info_container" onClick={handleClick}>
