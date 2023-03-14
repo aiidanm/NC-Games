@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchReviewsComments, fetchSingleReview } from "./api-requests";
 import '../App.css';
 
-const CommentReviewBox = ({review_id}) => {
+const CommentPageReviewBox = ({review_id}) => {
     const [loading, setLoading] = useState(true);
     const [review, setReview] = useState({});
 
@@ -37,4 +37,4 @@ const CommentReviewBox = ({review_id}) => {
    )
 }
 
-export default CommentReviewBox
+export default CommentPageReviewBox

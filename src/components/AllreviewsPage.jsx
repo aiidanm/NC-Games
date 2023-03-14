@@ -1,5 +1,5 @@
 import SortbySelector from "./sortbySelector"
-import DisplayReviews from "./displayReviews"
+import DisplayReviews from "./displayAllReviews"
 
 const ReviewsPage = () => {
 
