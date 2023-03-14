@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { fetchReviewsComments, fetchSingleReview } from "./api-requests";
+
+
 
 const CommentList = ({comments}) => {
-  const [loading, setLoading] = useState(true);
+
 
  
 

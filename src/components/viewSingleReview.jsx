@@ -40,7 +40,7 @@ const ViewReview = () => {
       </div>
       <h2>Comments: {review.comment_count}</h2>
       <CommentList comments={comments} />
-      <AddComment setComments={setComments}/>
+      <AddComment setComments={setComments} review_id={review_id}/>
     </div>
   );
 };

@@ -1,19 +1,22 @@
 import { useState } from "react"
+import { postComment } from "./api-requests"
 
 
-const AddComment = ({setComments}) => {
+const AddComment = ({setComments, review_id}) => {
 
-    const [comment, setComment] = useState()
+    const [comment, setComment] = useState("")
+    const [postObject, setPostObject] = useState({})
 
 
     const handleChange = (e) => {
         setComment(e.target.value)
+        setPostObject({body: comment, username: "testuser"})
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setComments((currComments) => [...currComments, comment])
-        
+        setComments((currComments) => [...currComments, {body: comment, author: "testuser", votes: 0}])
+        postComment(review_id, postObject).then((response) => console.log(response)).catch((err) => console.log(err))
     }
     return (
         <form id="commentform" onSubmit={handleSubmit}>
