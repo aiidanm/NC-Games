@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchReviews } from "./api-requests";
+import { Link } from "react-router-dom";
 
 const DisplayReviews = (sortby) => {
   const [reviews, setReviews] = useState([]);
@@ -17,6 +18,7 @@ const DisplayReviews = (sortby) => {
     <ul className="display_reviews_container" tabIndex="3">
       {reviews.map((review, index) => {
         return (
+          <Link to={`/reviews/${review.review_id}`} className="review_card_link">
           <li
             className="review_item_card"
             tabIndex={index + 4}
@@ -32,6 +34,7 @@ const DisplayReviews = (sortby) => {
               <p>Votes: {review.votes}</p>
             </div>
           </li>
+          </Link>
         );
       })}
     </ul>
