@@ -2,10 +2,13 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchSingleReview } from "./api-requests";
 import VoteButtons from "./voteButtons";
+import CommentList from "./CommentDisplay";
+
 const ViewReview = () => {
   const { review_id } = useParams();
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState({});
+
 
   useEffect(() => {
     setLoading(true);
@@ -18,7 +21,7 @@ const ViewReview = () => {
   const handleClick = (e) => {};
 
   return loading ? (
-    <h1>Loading..</h1>
+    <h2>Loading..</h2>
   ) : (
     <div className="single_review_container">
       <div className="single_review_info_container" onClick={handleClick}>
@@ -33,15 +36,9 @@ const ViewReview = () => {
         <h3 id="singleReviewDesigner">Designed by: {review.designer}</h3>
         <p id="singleReviewBody">{review.review_body}</p>
       </div>
-      <div className="review_buttons_container">
         <VoteButtons voteAmount={review.votes} review_id={review_id}/>
-
-        <Link to={`/reviews/${review_id}/comments`}>
-          <button id="singleReviewCommentButton">
-            view ({review.votes}) comments
-          </button>
-        </Link>
-      </div>
+      <h2>Comments</h2>
+      <CommentList review_id={review_id}/>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import './App.css';
 import Header from './components/header';
-import HomeButtons from './components/buttons';
-import ReviewsPage from './components/reviewsPage';
+import HomeButtons from './components/Homebuttons';
+import ReviewsPage from './components/AllreviewsPage';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-import ViewReview from './components/viewReview';
+import ViewReview from './components/viewSingleReview';
 
 
 function App() {
@@ -16,7 +16,6 @@ function App() {
         <Route path='/categories' element={<Header/>}/>
         <Route path='/reviews' element={<><Header/> <ReviewsPage /> </>}/>
         <Route path='/reviews/:review_id' element={<><Header /> <ViewReview /> </>}/>
-        <Route path='/reviews/:review_id/comments' element={<><Header/></>}/>
       </Routes>
     </div>
   );

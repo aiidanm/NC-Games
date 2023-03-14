@@ -20,8 +20,14 @@ exports.patchReviewVotes = (review_id, patchObject) => {
     .then((data) => {
       if (data.msg) {
         return Promise.reject("failed");
-      }else {
-        return data
+      } else {
+        return data;
       }
     });
+};
+
+exports.fetchReviewsComments = (review_id) => {
+  return fetch(
+    `https://aidan-nc-games.onrender.com/api/reviews/${review_id}/comments`
+  ).then((data) => data.json());
 };
