@@ -18,7 +18,7 @@ const DisplayReviews = (sortby) => {
     <ul className="display_reviews_container" tabIndex="3">
       {reviews.map((review, index) => {
         return (
-          <Link to={`/reviews/${review.review_id}`} className="review_card_link">
+          <Link to={`/reviews/${review.review_id}`} className="review_card_link" key={`review:${index}`}>
           <li
             className="review_item_card"
             tabIndex={index + 4}
