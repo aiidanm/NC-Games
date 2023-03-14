@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchSingleReview } from "./api-requests";
-
+import VoteButtons from "./voteButtons";
 const ViewReview = () => {
   const { review_id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -34,11 +34,7 @@ const ViewReview = () => {
         <p id="singleReviewBody">{review.review_body}</p>
       </div>
       <div className="review_buttons_container">
-        <div className="review_vote_container">
-          <button id="increase_vote">+</button>
-          <button id="votes_count" disabled>Votes: {review.votes}</button>
-          <button id="decrease_vote">-</button>
-        </div>
+        <VoteButtons voteAmount={review.votes} review_id={review_id}/>
 
         <Link to={`/reviews/${review_id}/comments`}>
           <button id="singleReviewCommentButton">
