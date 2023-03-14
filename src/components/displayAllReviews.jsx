@@ -14,7 +14,7 @@ const DisplayReviews = (sortby) => {
     });
   }, [sortby]);
 
-  return isLoading ? (<h1>Loading...</h1> ) : (
+  return isLoading ? (<h2>Loading...</h2> ) : (
     <ul className="display_reviews_container" tabIndex="3">
       {reviews.map((review, index) => {
         return (
