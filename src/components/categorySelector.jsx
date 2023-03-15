@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { fetchCategories } from "./api-requests";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
 
-const CategorySelector = () => {
+
+const CategorySelector = ({setSelectedCategory}) => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("Date");
 
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
+    console.log(e.target.value)
   };
 
   useEffect(() => {
@@ -14,16 +16,18 @@ const CategorySelector = () => {
   }, []);
   return (
     <>
-      <label htmlFor="sortby_selector">Category: </label>
+      <label htmlFor="category_selector">Category: </label>
       <select
         id="category_selector"
         className="category_selector"
         tabIndex="2"
         onChange={handleChange}
       >
-        <option>All</option>
+        <option value={""}>All</option>
         {categories.map((category) => {
-          return <option>{category.slug}</option>;
+          return (
+              <option value={`?category=${category.slug}`}>{category.slug}</option>
+          )
         })}
       </select>
     </>
