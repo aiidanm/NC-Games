@@ -32,6 +32,7 @@ const DisplayReviews = (sortby) => {
             <div className="review_list_info_container">
               <h5>{review.title}</h5>
               <p>Votes: {review.votes}</p>
+              <p>comments: {review.comment_count}</p>
             </div>
           </li>
           </Link>

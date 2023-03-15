@@ -7,7 +7,6 @@ const AddComment = ({ setComments, review_id, setErr }) => {
 
   const handleChange = (e) => {
     setComment(e.target.value);
-    setPostObject({ body: comment, username: "weegembump" });
   };
 
   const handleSubmit = (e) => {
@@ -16,13 +15,15 @@ const AddComment = ({ setComments, review_id, setErr }) => {
       { body: comment, author: "weegembump", votes: 0 },
       ...currComments,
     ]);
-    postComment(review_id, postObject).catch((err) => {
-      if (err) {
-        setComments((currComments) => currComments.slice(1));
-        setErr(true);
-        setTimeout(() => setErr(false), 3000);
+    postComment(review_id, { body: comment, username: "weegembump" }).catch(
+      (err) => {
+        if (err) {
+          setComments((currComments) => currComments.slice(1));
+          setErr(true);
+          setTimeout(() => setErr(false), 3000);
+        }
       }
-    });
+    );
   };
   return (
     <form id="commentform" onSubmit={handleSubmit}>
