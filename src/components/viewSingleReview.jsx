@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchSingleReview } from "./api-requests";
+import VoteButtons from "./voteButtons";
 import CommentList from "./CommentDisplay";
 
 const ViewReview = () => {
@@ -35,13 +36,7 @@ const ViewReview = () => {
         <h3 id="singleReviewDesigner">Designed by: {review.designer}</h3>
         <p id="singleReviewBody">{review.review_body}</p>
       </div>
-      <div className="review_buttons_container">
-        <div className="review_vote_container">
-          <button id="increase_vote">+</button>
-          <button id="votes_count" disabled>Votes: {review.votes}</button>
-          <button id="decrease_vote">-</button>
-        </div>
-      </div>
+        <VoteButtons voteAmount={review.votes} review_id={review_id}/>
       <h2>Comments</h2>
       <CommentList review_id={review_id}/>
     </div>
