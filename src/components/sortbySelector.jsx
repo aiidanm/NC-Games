@@ -5,7 +5,6 @@ const SortbySelector = () => {
 
     const handleChange = (e) => {
         setSelectedSortBy(e.target.value)
-        console.log(selectedSortBy)
     }
     return (
         <>

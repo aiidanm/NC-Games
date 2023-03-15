@@ -31,3 +31,9 @@ exports.fetchReviewsComments = (review_id) => {
     `https://aidan-nc-games.onrender.com/api/reviews/${review_id}/comments`
   ).then((data) => data.json());
 };
+
+exports.fetchCategories = () => {
+  return fetch(`https://aidan-nc-games.onrender.com/api/categories`).then(
+    (data) => data.json()
+  );
+};
