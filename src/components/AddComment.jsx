@@ -10,12 +10,12 @@ const AddComment = ({setComments, review_id}) => {
 
     const handleChange = (e) => {
         setComment(e.target.value)
-        setPostObject({body: comment, username: "testuser"})
+        setPostObject({body: comment, username: "weegembump"})
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setComments((currComments) => [...currComments, {body: comment, author: "testuser", votes: 0}])
+        setComments((currComments) => [...currComments, {body: comment, author: "weegembump", votes: 0}])
         postComment(review_id, postObject).then((response) => console.log(response)).catch((err) => console.log(err))
     }
     return (

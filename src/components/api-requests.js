@@ -17,6 +17,7 @@ exports.fetchReviewsComments = (review_id) => {
 };
 
 exports.postComment = (review_id, postObject) => {
+  console.log(review_id, postObject)
   return fetch(
     `https://aidan-nc-games.onrender.com/api/reviews/${review_id}/comments`,
     {
