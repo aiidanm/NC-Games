@@ -21,6 +21,8 @@ const VoteButtons = ({ voteAmount, review_id }) => {
     }
   };
 
+  
+
 
 
   return (

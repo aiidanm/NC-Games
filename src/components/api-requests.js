@@ -1,5 +1,6 @@
-exports.fetchReviews = () => {
-  return fetch(`https://aidan-nc-games.onrender.com/api/reviews/`).then(
+exports.fetchReviews = (category) => {
+  console.log(category)
+  return fetch(`https://aidan-nc-games.onrender.com/api/reviews${category}`).then(
     (data) => data.json()
   );
 };
