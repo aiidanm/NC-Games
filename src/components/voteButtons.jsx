@@ -5,40 +5,34 @@ const VoteButtons = ({ voteAmount, review_id }) => {
   const [votes, setVotes] = useState(voteAmount);
   const [errMsg, setErrMsg] = useState(null);
   const [hasVoted, setHasVoted] = useState(false);
-  const [voteInc, setVoteInc] = useState(null);
 
-  const handleClick = (e) => {
-    if (e.target.textContent === "+") {
-      setVoteInc(1);
-    } else if (e.target.textContent === "-") {
-      setVoteInc(-1);
-    }
+  const handleClick = (e, voteInc) => {
     if (!hasVoted) {
       setHasVoted(true);
-      setVotes((currVotes) => currVotes + 1);
+      setVotes((currVotes) => currVotes + voteInc);
       setErrMsg(null);
-      patchReviewVotes(review_id, { inc_votes: 1 }).catch((err) => {
+      patchReviewVotes(review_id, { inc_votes: voteInc }).catch((err) => {
         if (err) {
           setHasVoted(false);
-          setVotes((currVotes) => currVotes - 1);
+          setVotes((currVotes) => currVotes - voteInc);
           setErrMsg("Vote failed");
         }
       });
     }
   };
 
-  
+
 
   return (
     <div className="review_vote_container">
       <h3>{errMsg}</h3>
-      <button id="increase_vote" onClick={handleClick}>
+      <button id="increase_vote" onClick={e => handleClick(e, 1)}>
         +
       </button>
       <button id="votes_count" disabled>
         Votes: {votes}
       </button>
-      <button id="decrease_vote" onClick={handleClick}>
+      <button id="decrease_vote" onClick={e => handleClick(e, -1)}>
         -
       </button>
     </div>
