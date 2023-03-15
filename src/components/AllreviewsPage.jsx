@@ -1,7 +1,10 @@
 import SortbySelector from "./sortbySelector"
 import DisplayReviews from "./displayAllReviews"
+import CategorySelector from "./categorySelector"
+import { useState } from "react"
 
 const ReviewsPage = () => {
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     return (
         <div className="reviews_display">
@@ -9,8 +12,10 @@ const ReviewsPage = () => {
 
             <div className="sortby_container">
                 <SortbySelector />
+                <CategorySelector setSelectedCategory={setSelectedCategory}/>
             </div>
-            <DisplayReviews />
+            
+            <DisplayReviews selectedCategory={selectedCategory}/>
 
         </div>
     )

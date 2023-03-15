@@ -1,5 +1,5 @@
-exports.fetchReviews = () => {
-  return fetch(`https://aidan-nc-games.onrender.com/api/reviews/`).then(
+exports.fetchReviews = (category = "") => {
+  return fetch(`https://aidan-nc-games.onrender.com/api/reviews/${category}`).then(
     (data) => data.json()
   );
 };
@@ -30,4 +30,10 @@ exports.fetchReviewsComments = (review_id) => {
   return fetch(
     `https://aidan-nc-games.onrender.com/api/reviews/${review_id}/comments`
   ).then((data) => data.json());
+};
+
+exports.fetchCategories = () => {
+  return fetch(`https://aidan-nc-games.onrender.com/api/categories`).then(
+    (data) => data.json()
+  );
 };
