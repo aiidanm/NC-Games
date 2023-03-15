@@ -1,44 +1,40 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchSingleReview } from "./api-requests";
+import { fetchSingleReview, fetchReviewsComments } from "./api-requests";
 import VoteButtons from "./voteButtons";
 import CommentList from "./CommentDisplay";
+import DisplayReview from "./displayReview";
+import AddComment from "./AddComment";
 
 const ViewReview = () => {
   const { review_id } = useParams();
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState({});
+  const [comments, setComments] = useState([]);
+  const [err, setErr] = useState(false)
 
 
   useEffect(() => {
     setLoading(true);
-    fetchSingleReview(review_id).then((data) => {
-      setLoading(false);
-      return setReview(data.review);
+    fetchSingleReview(review_id).then((reviewData) => {
+      fetchReviewsComments(review_id).then((commentData) => {
+        setLoading(false);
+        setComments(commentData.comments);
+        setReview(reviewData.review);
+      });
     });
-  }, []);
-
-  const handleClick = (e) => {};
+  }, [review_id]);
 
   return loading ? (
     <h2>Loading..</h2>
   ) : (
     <div className="single_review_container">
-      <div className="single_review_info_container" onClick={handleClick}>
-        <h1 id="singleReviewTitle">{review.title}</h1>
-        <h2 id="singleReviewOwner">a review by: {review.owner}</h2>
-        <img
-          src={review.review_img_url}
-          alt={review.title}
-          className="singlereview_img"
-        ></img>
-        <h3 id="singleReviewCategory">Category: {review.category}</h3>
-        <h3 id="singleReviewDesigner">Designed by: {review.designer}</h3>
-        <p id="singleReviewBody">{review.review_body}</p>
-      </div>
-        <VoteButtons voteAmount={review.votes} review_id={review_id}/>
-      <h2>Comments</h2>
-      <CommentList review_id={review_id}/>
+      <DisplayReview review={review} />
+      <VoteButtons voteAmount={review.votes} review_id={review_id} />
+      <h2 id="comment_h2">Comments: {comments.length}</h2>
+      {err ? <h2>Failed to post comment:</h2> : null}
+      <CommentList comments={comments} />
+      <AddComment setComments={setComments} review_id={review_id} setErr={setErr}/>
     </div>
   );
 };
