@@ -25,7 +25,7 @@ const VoteButtons = ({ voteAmount, review_id }) => {
 
   return (
     <div className="review_vote_container">
-      <h3>{errMsg}</h3>
+      <h3 id>{errMsg}</h3>
       <button id="increase_vote" onClick={e => handleClick(e, 1)}>
         +
       </button>
