@@ -1,8 +1,7 @@
 exports.fetchReviews = (category) => {
-  console.log(category)
-  return fetch(`https://aidan-nc-games.onrender.com/api/reviews${category}`).then(
-    (data) => data.json()
-  );
+  return fetch(
+    `https://aidan-nc-games.onrender.com/api/reviews${category}`
+  ).then((data) => data.json());
 };
 
 exports.fetchSingleReview = (review_id) => {
@@ -34,7 +33,7 @@ exports.fetchReviewsComments = (review_id) => {
 };
 
 exports.postComment = (review_id, postObject) => {
-  console.log(review_id, postObject)
+  console.log(review_id, postObject);
   return fetch(
     `https://aidan-nc-games.onrender.com/api/reviews/${review_id}/comments`,
     {
@@ -45,7 +44,6 @@ exports.postComment = (review_id, postObject) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
       if (data.msg) {
         return Promise.reject("Post failed");
       } else {
@@ -68,4 +66,10 @@ exports.patchReviewVotes = (review_id, patchObject) => {
         return data;
       }
     });
+};
+
+exports.fetchCategories = () => {
+  return fetch("https://aidan-nc-games.onrender.com/api/categories").then(
+    (response) => response.json()
+  );
 };

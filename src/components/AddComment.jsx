@@ -3,7 +3,6 @@ import { postComment } from "./api-requests";
 
 const AddComment = ({ setComments, review_id, setErr }) => {
   const [comment, setComment] = useState("");
-  const [postObject, setPostObject] = useState({});
 
   const handleChange = (e) => {
     setComment(e.target.value);
@@ -25,6 +24,9 @@ const AddComment = ({ setComments, review_id, setErr }) => {
       }
     );
   };
+
+
+
   return (
     <form id="commentform" onSubmit={handleSubmit}>
       <input id="commentinput" onChange={handleChange}></input>
