@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import { fetchReviews } from "./axiosrequests";
 import { Link } from "react-router-dom";
 
-const DisplayReviews = ({selectedCategory, selectedSortBy, selectedOrderBy, sortByQuery, orderByQuery}) => {
+const DisplayReviews = ({categoryQuery, sortByQuery, orderByQuery}) => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchReviews(sortByQuery, orderByQuery).then((response) => {
+    fetchReviews(sortByQuery, orderByQuery, categoryQuery).then((response) => {
         setIsLoading(false)
       return setReviews(response.reviews);
     });
-  }, [sortByQuery, orderByQuery]);
+  }, [sortByQuery, orderByQuery, categoryQuery]);
 
   return isLoading ? (<h2>Loading...</h2> ) : (
     <ul className="display_reviews_container" tabIndex="3">

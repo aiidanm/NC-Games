@@ -4,10 +4,11 @@ const mainApi = axios.create({
   baseURL: "https://aidan-nc-games.onrender.com/api",
 });
 
-export const fetchReviews = (sortBy, orderBy) => {
+export const fetchReviews = (sortBy, orderBy, category) => {
   return mainApi.get(`/reviews/`, { params: {
     sort_by: sortBy,
-    order_by: orderBy
+    order_by: orderBy,
+    category: category
   } }).then((data) => data.data);
 };
 
@@ -47,3 +48,7 @@ export const fetchReviewsComments = (review_id) => {
     .get(`/reviews/${review_id}/comments`)
     .then((data) => data.data);
 };
+
+export const fetchCategories = () => {
+    return mainApi.get("/categories").then((data) => data.data)
+}
