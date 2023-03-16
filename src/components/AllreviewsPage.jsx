@@ -1,19 +1,40 @@
-import SortbySelector from "./sortbySelector"
-import DisplayReviews from "./displayAllReviews"
+import SortbySelector from "./sortbySelector";
+import DisplayReviews from "./displayAllReviews";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import CategorySelector from "./categorySelector";
 
 const ReviewsPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
-    return (
-        <div className="reviews_display">
-            <h2>Reviews</h2>
+  const categoryQuery = searchParams.get("category");
+  const sortByQuery = searchParams.get("sortBy");
 
-            <div className="sortby_container">
-                <SortbySelector />
-            </div>
-            <DisplayReviews />
+  /* get category from url query params*/
+  useEffect(() => {
+    if (categoryQuery === null || categoryQuery === "") {
+      setSelectedCategory("");
+    } else {
+      setSelectedCategory(`?category=${categoryQuery}`);
+    }
+  }, [categoryQuery]);
 
-        </div>
-    )
-}
+  return (
+    <div className="reviews_display">
+      <h2>Reviews</h2>
 
-export default ReviewsPage
+      <div className="sortby_container">
+        <SortbySelector />
+        <CategorySelector
+          setSelectedCategory={setSelectedCategory}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
+      </div>
+      <DisplayReviews selectedCategory={selectedCategory} />
+    </div>
+  );
+};
+
+export default ReviewsPage;
