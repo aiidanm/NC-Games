@@ -5,15 +5,22 @@ const mainApi = axios.create({
 });
 
 export const fetchReviews = (sortBy, orderBy, category) => {
-  return mainApi.get(`/reviews/`, { params: {
-    sort_by: sortBy,
-    order_by: orderBy,
-    category: category
-  } }).then((data) => data.data);
+  return mainApi
+    .get(`/reviews/`, {
+      params: {
+        sort_by: sortBy,
+        order_by: orderBy,
+        category: category,
+      },
+    })
+    .then((data) => data.data);
 };
 
 export const fetchSingleReview = (review_id) => {
-  return mainApi.get(`/reviews/${review_id}`).then((data) => data.data);
+  return mainApi
+    .get(`/reviews/${review_id}`)
+    .then((data) => data.data)
+    .catch((err) => Promise.reject(err.response.data.msg));
 };
 
 export const postComment = (review_id, postObject) => {
@@ -50,5 +57,5 @@ export const fetchReviewsComments = (review_id) => {
 };
 
 export const fetchCategories = () => {
-    return mainApi.get("/categories").then((data) => data.data)
-}
+  return mainApi.get("/categories").then((data) => data.data);
+};
