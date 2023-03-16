@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { fetchReviews } from "./api-requests";
+import { fetchReviews } from "./axiosrequests";
 import { Link } from "react-router-dom";
 
-const DisplayReviews = ({selectedCategory}) => {
+const DisplayReviews = ({selectedCategory, selectedSortBy, selectedOrderBy, sortByQuery, orderByQuery}) => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchReviews(selectedCategory).then((response) => {
+    fetchReviews(sortByQuery, orderByQuery).then((response) => {
         setIsLoading(false)
       return setReviews(response.reviews);
     });
-  }, [selectedCategory]);
+  }, [sortByQuery, orderByQuery]);
 
   return isLoading ? (<h2>Loading...</h2> ) : (
     <ul className="display_reviews_container" tabIndex="3">
@@ -23,6 +23,7 @@ const DisplayReviews = ({selectedCategory}) => {
             className="review_item_card"
             tabIndex={index + 4}
             key={`review_${index}`}
+            
           >
             <img
               className="review_img"

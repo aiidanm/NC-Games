@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { patchReviewVotes } from "./api-requests";
+import { patchReviewVotes } from "./axiosrequests";
 
 const VoteButtons = ({ voteAmount, review_id }) => {
   const [votes, setVotes] = useState(voteAmount);

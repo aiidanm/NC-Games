@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postComment } from "./api-requests";
+import { postComment } from "./axiosrequests";
 
 const AddComment = ({ setComments, review_id, setErr }) => {
   const [comment, setComment] = useState("");
