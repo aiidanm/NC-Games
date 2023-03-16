@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchCategories } from "./api-requests";
+import { fetchCategories } from "./axiosrequests";
 
 const CategorySelector = ({ searchParams, setSearchParams }) => {
   const [categories, setCategories] = useState([]);

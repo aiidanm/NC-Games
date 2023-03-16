@@ -1,22 +1,23 @@
 import { useState } from "react"
-const SortbySelector = () => {
+const SortbySelector = ({setSearchParams, searchParams}) => {
 
-    const [selectedSortBy, setSelectedSortBy] = useState("Date")
+
 
     const handleChange = (e) => {
-        setSelectedSortBy(e.target.value)
-        console.log(selectedSortBy)
+        const newParams = new URLSearchParams(searchParams)
+        newParams.set("sort_by", e.target.value)
+        setSearchParams(newParams)
     }
     return (
         <>
         <label htmlFor="sortby_selector">Sort by: </label>
         <select id="sortby_selector" className="sortby_selector" tabIndex="2" onChange={handleChange}>
-            <option>Title</option>
-            <option>Owner</option>
-            <option>designer</option>
-            <option>category</option>
-            <option>created date</option>
-            <option>votes</option>
+            <option value={"title"}>Title</option>
+            <option value={"owner"}>Owner</option>
+            <option value={"designer"}>designer</option>
+            <option value={"category"}>category</option>
+            <option value={"created_at"}>created date</option>
+            <option value={"votes"}>votes</option>
         </select>
         </>
     )
