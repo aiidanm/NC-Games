@@ -6,26 +6,30 @@ const AddComment = ({ setComments, review_id, setErr }) => {
   const [comment, setComment] = useState("");
   const { user, SetUser } = useContext(userContext);
 
-
   const handleChange = (e) => {
     setComment(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setComments((currComments) => [
-      { body: comment, author: user, votes: 0 },
-      ...currComments,
-    ]);
-    postComment(review_id, { body: comment, username: user }).catch(
-      (err) => {
+    postComment(review_id, { body: comment, username: user })
+      .then((response) => {
+        setComments((currComments) => [
+          {
+            body: comment,
+            author: user,
+            votes: 0,
+            comment_id: response.comment.comment_id,
+          },
+          ...currComments,
+        ]);
+      })
+      .catch((err) => {
         if (err) {
-          setComments((currComments) => currComments.slice(1));
           setErr(true);
           setTimeout(() => setErr(false), 3000);
         }
-      }
-    );
+      });
   };
 
   return (

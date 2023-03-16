@@ -8,18 +8,20 @@ const CommentList = ({ comments, setComments }) => {
   const [usrErr, setUsrErr] = useState(false);
 
   const handleDelete = (e) => {
-    console.log(comments);
     setDeletedComment(comments.find((x) => x.comment_id === e.target.id));
-    setComments((currComments) =>
-      currComments.filter((comment) => comment.comment_id !== e.target.id)
-    );
-    deleteComment(e.target.id).catch((err) => {
-      if (err) {
-        setComments((currComments) => [...currComments, deletedComment]);
-        setUsrErr(true);
-        setTimeout(() => setUsrErr(false), 3000);
-      }
-    });
+
+    deleteComment(e.target.id)
+      .then((response) => {
+        
+        setComments((currComments) =>
+          currComments.filter((comment) => comment.comment_id !== Number(e.target.id)));
+      })
+      .catch((err) => {
+        if (err) {
+          setUsrErr(true);
+          setTimeout(() => setUsrErr(false), 3000);
+        }
+      });
   };
 
   return (
