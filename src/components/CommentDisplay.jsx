@@ -1,9 +1,13 @@
+import { useContext } from "react";
+import { userContext } from "../contexts/user";
 
+const CommentList = ({comments, setComments}) => {
+  const { user, SetUser } = useContext(userContext);
 
-
-const CommentList = ({comments}) => {
-
-
+  const handleDelete = (e) => {
+    console.log(e.target.id)
+    
+  }
  
 
 return (
@@ -19,6 +23,7 @@ return (
             <div>
               <p>written by: {comment.author}</p>
               <p>votes: {comment.votes}</p>
+              {user === comment.author ? <button id={comment.comment_id} onClick={handleDelete}>delete comment</button> : null}
             </div>
           </li>
         );

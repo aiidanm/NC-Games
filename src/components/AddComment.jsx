@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { postComment } from "./api-requests";
+import { userContext } from "../contexts/user";
 
 const AddComment = ({ setComments, review_id, setErr }) => {
   const [comment, setComment] = useState("");
+  const { user, SetUser } = useContext(userContext);
+
 
   const handleChange = (e) => {
     setComment(e.target.value);
@@ -11,10 +14,10 @@ const AddComment = ({ setComments, review_id, setErr }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setComments((currComments) => [
-      { body: comment, author: "weegembump", votes: 0 },
+      { body: comment, author: user, votes: 0 },
       ...currComments,
     ]);
-    postComment(review_id, { body: comment, username: "weegembump" }).catch(
+    postComment(review_id, { body: comment, username: user }).catch(
       (err) => {
         if (err) {
           setComments((currComments) => currComments.slice(1));
@@ -24,8 +27,6 @@ const AddComment = ({ setComments, review_id, setErr }) => {
       }
     );
   };
-
-
 
   return (
     <form id="commentform" onSubmit={handleSubmit}>

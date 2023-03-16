@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { fetchReviews } from "./api-requests";
 import { Link } from "react-router-dom";
+import { userContext } from "../contexts/user";
+
 
 const DisplayReviews = ({selectedCategory}) => {
   const [reviews, setReviews] = useState([]);
