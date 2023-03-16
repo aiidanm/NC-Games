@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchSingleReview, fetchReviewsComments } from "./api-requests";
+import { fetchSingleReview, fetchReviewsComments } from "./axiosrequests";
+
 import VoteButtons from "./voteButtons";
 import CommentList from "./CommentDisplay";
 import DisplayReview from "./displayReview";

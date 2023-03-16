@@ -1,38 +1,36 @@
 import SortbySelector from "./sortbySelector";
+import OrderBySelector from "./orderby";
 import DisplayReviews from "./displayAllReviews";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import CategorySelector from "./categorySelector";
 
 const ReviewsPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-
   const categoryQuery = searchParams.get("category");
-  const sortByQuery = searchParams.get("sortBy");
+  const sortByQuery = searchParams.get("sort_by");
+  const orderByQuery = searchParams.get("order_by");
 
-  /* get category from url query params*/
-  useEffect(() => {
-    if (categoryQuery === null || categoryQuery === "") {
-      setSelectedCategory("");
-    } else {
-      setSelectedCategory(`?category=${categoryQuery}`);
-    }
-  }, [categoryQuery]);
 
   return (
     <div className="reviews_display">
       <h2>Reviews</h2>
 
       <div className="sortby_container">
-        <SortbySelector />
+        <SortbySelector
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
+        <OrderBySelector
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
         <CategorySelector
-          setSelectedCategory={setSelectedCategory}
           searchParams={searchParams}
           setSearchParams={setSearchParams}
         />
       </div>
-      <DisplayReviews selectedCategory={selectedCategory} />
+      <DisplayReviews categoryQuery={categoryQuery} sortByQuery={sortByQuery} orderByQuery={orderByQuery}/>
     </div>
   );
 };

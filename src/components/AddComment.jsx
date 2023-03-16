@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import { postComment } from "./api-requests";
 import { userContext } from "../contexts/user";
+import { postComment } from "./axiosrequests";
 
 const AddComment = ({ setComments, review_id, setErr }) => {
   const [comment, setComment] = useState("");

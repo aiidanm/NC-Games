@@ -1,16 +1,28 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { userContext } from "../contexts/user";
+import { deleteComment } from "./axiosrequests";
 
-const CommentList = ({comments, setComments}) => {
+const CommentList = ({ comments, setComments }) => {
   const { user, SetUser } = useContext(userContext);
+  const [deletedComment, setDeletedComment] = useState({});
+  const [usrErr, setUsrErr] = useState(false);
 
   const handleDelete = (e) => {
-    console.log(e.target.id)
-    
-  }
- 
+    console.log(comments);
+    setDeletedComment(comments.find((x) => x.comment_id === e.target.id));
+    setComments((currComments) =>
+      currComments.filter((comment) => comment.comment_id !== e.target.id)
+    );
+    deleteComment(e.target.id).catch((err) => {
+      if (err) {
+        setComments((currComments) => [...currComments, deletedComment]);
+        setUsrErr(true);
+        setTimeout(() => setUsrErr(false), 3000);
+      }
+    });
+  };
 
-return (
+  return (
     <ul className="comment_list" tabIndex={1}>
       {comments.map((comment, index) => {
         return (
@@ -23,7 +35,12 @@ return (
             <div>
               <p>written by: {comment.author}</p>
               <p>votes: {comment.votes}</p>
-              {user === comment.author ? <button id={comment.comment_id} onClick={handleDelete}>delete comment</button> : null}
+              {user === comment.author ? (
+                <button id={comment.comment_id} onClick={handleDelete}>
+                  delete comment
+                </button>
+              ) : null}
+              {usrErr ? <h3>delete failed</h3> : null}
             </div>
           </li>
         );
