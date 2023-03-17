@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { fetchReviews } from "./axiosrequests";
 import { Link } from "react-router-dom";
+
 
 const DisplayReviews = ({categoryQuery, sortByQuery, orderByQuery}) => {
   const [reviews, setReviews] = useState([]);

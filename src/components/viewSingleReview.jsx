@@ -34,7 +34,7 @@ const ViewReview = () => {
       <VoteButtons voteAmount={review.votes} review_id={review_id} />
       <h2 id="comment_h2">Comments: {comments.length}</h2>
       {err ? <h2>Failed to post comment:</h2> : null}
-      <CommentList comments={comments} />
+      <CommentList comments={comments} setComments={setComments} />
       <AddComment setComments={setComments} review_id={review_id} setErr={setErr}/>
     </div>
   );
