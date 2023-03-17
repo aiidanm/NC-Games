@@ -4,15 +4,14 @@ import { deleteComment } from "./axiosrequests";
 
 const CommentList = ({ comments, setComments }) => {
   const { user, SetUser } = useContext(userContext);
-  const [deletedComment, setDeletedComment] = useState({});
   const [usrErr, setUsrErr] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = (e) => {
-    setDeletedComment(comments.find((x) => x.comment_id === e.target.id));
-
+    setIsDeleting(true)
     deleteComment(e.target.id)
       .then((response) => {
-        
+        setIsDeleting(false)
         setComments((currComments) =>
           currComments.filter((comment) => comment.comment_id !== Number(e.target.id)));
       })
@@ -25,6 +24,8 @@ const CommentList = ({ comments, setComments }) => {
   };
 
   return (
+    <>
+    {isDeleting ? <h2>Deleting comment</h2> : null}
     <ul className="comment_list" tabIndex={1}>
       {comments.map((comment, index) => {
         return (
@@ -48,6 +49,7 @@ const CommentList = ({ comments, setComments }) => {
         );
       })}
     </ul>
+    </>
   );
 };
 
