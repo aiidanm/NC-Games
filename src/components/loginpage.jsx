@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const Login = () => {
 
-    const {user, setUser} = useContext(userContext)
+    const {setUser} = useContext(userContext)
 
 
     const handleClick = (e) => {
@@ -19,7 +19,7 @@ const Login = () => {
 
     return (
         <div className="login_container"> 
-            <h1>Login to NC GAMES</h1>
+            <h2>Login to NC GAMES</h2>
             <Link to={"/home"}>
             <button onClick={handleClick} id="loginbutton">Login</button>
             </Link>

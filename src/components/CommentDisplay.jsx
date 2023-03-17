@@ -3,7 +3,7 @@ import { userContext } from "../contexts/user";
 import { deleteComment } from "./axiosrequests";
 
 const CommentList = ({ comments, setComments }) => {
-  const { user, SetUser } = useContext(userContext);
+  const { user} = useContext(userContext);
   const [usrErr, setUsrErr] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 

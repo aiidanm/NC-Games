@@ -1,7 +1,6 @@
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchSingleReview, fetchReviewsComments } from "./axiosrequests";
-
 import VoteButtons from "./voteButtons";
 import CommentList from "./CommentDisplay";
 import DisplayReview from "./displayReview";
@@ -12,22 +11,33 @@ const ViewReview = () => {
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState({});
   const [comments, setComments] = useState([]);
-  const [err, setErr] = useState(false)
-
+  const [err, setErr] = useState(false);
+  const [reviewErr, setReviewErr] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    fetchSingleReview(review_id).then((reviewData) => {
-      fetchReviewsComments(review_id).then((commentData) => {
+    fetchSingleReview(review_id)
+      .catch((err) => {
+        setReviewErr(err);
         setLoading(false);
-        setComments(commentData.comments);
-        setReview(reviewData.review);
+      })
+      .then((reviewData) => {
+        fetchReviewsComments(review_id)
+          .then((commentData) => {
+            setLoading(false);
+            setComments(commentData.comments);
+            setReview(reviewData.review);
+          })
+          .catch((err) => {
+            setReviewErr(err);
+          });
       });
-    });
   }, [review_id]);
 
   return loading ? (
     <h2>Loading..</h2>
+  ) : reviewErr ? (
+    <h2>{reviewErr}</h2>
   ) : (
     <div className="single_review_container">
       <DisplayReview review={review} />
@@ -35,7 +45,11 @@ const ViewReview = () => {
       <h2 id="comment_h2">Comments: {comments.length}</h2>
       {err ? <h2>Failed to post comment:</h2> : null}
       <CommentList comments={comments} setComments={setComments} />
-      <AddComment setComments={setComments} review_id={review_id} setErr={setErr}/>
+      <AddComment
+        setComments={setComments}
+        review_id={review_id}
+        setErr={setErr}
+      />
     </div>
   );
 };
