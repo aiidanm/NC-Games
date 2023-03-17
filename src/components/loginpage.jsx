@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const Login = () => {
 
-    const {user, setUser} = useContext(userContext)
+    const {setUser} = useContext(userContext)
 
 
     const handleClick = (e) => {
