@@ -10,22 +10,23 @@ import Login from "./components/loginpage";
 function App() {
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route
           path="/home"
           element={
             <>
-              <Header /> <HomeButtons />
+               <HomeButtons />
             </>
           }
         />
-        <Route path="/categories" element={<Header />} />
+        <Route path="/categories" element={<></>} />
         <Route
           path="/reviews"
           element={
             <>
-              <Header /> <ReviewsPage />{" "}
+               <ReviewsPage />{" "}
             </>
           }
         />
@@ -33,7 +34,7 @@ function App() {
           path="/reviews/:review_id"
           element={
             <>
-              <Header /> <ViewReview />{" "}
+               <ViewReview />{" "}
             </>
           }
         />
@@ -41,7 +42,7 @@ function App() {
           path="*"
           element={
             <>
-              <Header /> <ErrorPage />{" "}
+               <ErrorPage />{" "}
             </>
           }
         ></Route>

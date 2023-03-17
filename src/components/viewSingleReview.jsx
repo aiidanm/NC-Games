@@ -22,11 +22,15 @@ const ViewReview = () => {
         setLoading(false);
       })
       .then((reviewData) => {
-        fetchReviewsComments(review_id).then((commentData) => {
-          setLoading(false);
-          setComments(commentData.comments);
-          setReview(reviewData.review);
-        });
+        fetchReviewsComments(review_id)
+          .then((commentData) => {
+            setLoading(false);
+            setComments(commentData.comments);
+            setReview(reviewData.review);
+          })
+          .catch((err) => {
+            setReviewErr(err);
+          });
       });
   }, [review_id]);
 

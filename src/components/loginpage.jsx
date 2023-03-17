@@ -19,7 +19,7 @@ const Login = () => {
 
     return (
         <div className="login_container"> 
-            <h1>Login to NC GAMES</h1>
+            <h2>Login to NC GAMES</h2>
             <Link to={"/home"}>
             <button onClick={handleClick} id="loginbutton">Login</button>
             </Link>

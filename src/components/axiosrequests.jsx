@@ -54,7 +54,8 @@ export const patchReviewVotes = (review_id, patchObject) => {
 export const fetchReviewsComments = (review_id) => {
   return mainApi
     .get(`/reviews/${review_id}/comments`)
-    .then((data) => data.data);
+    .then((data) => data.data)
+    .catch((err) => Promise.reject(err.response.data.msg))
 };
 
 export const fetchCategories = () => {
