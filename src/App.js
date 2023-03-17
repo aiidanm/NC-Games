@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/header';
 import HomeButtons from './components/Homebuttons';
 import ReviewsPage from './components/AllreviewsPage';
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
 import ViewReview from './components/viewSingleReview';
 
 
