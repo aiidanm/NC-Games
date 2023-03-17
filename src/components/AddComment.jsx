@@ -5,7 +5,7 @@ import { postComment } from "./axiosrequests";
 const AddComment = ({ setComments, review_id, setErr }) => {
   const [comment, setComment] = useState("");
   const [commentErr, setCommentErr] = useState(null);
-  const { user, SetUser } = useContext(userContext);
+  const { user} = useContext(userContext);
 
   const handleChange = (e) => {
     setComment(e.target.value);
