@@ -5,13 +5,15 @@ import ReviewsPage from "./components/AllreviewsPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ViewReview from "./components/viewSingleReview";
 import ErrorPage from "./components/ErrorPage";
+import Login from "./components/loginpage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<Login />}></Route>
         <Route
-          path="/"
+          path="/home"
           element={
             <>
               <Header /> <HomeButtons />

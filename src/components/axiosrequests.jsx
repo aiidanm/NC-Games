@@ -13,7 +13,8 @@ export const fetchReviews = (sortBy, orderBy, category) => {
         category: category,
       },
     })
-    .then((data) => data.data);
+    .then((data) => data.data)
+    .catch((err) => Promise.reject(err.response.data.msg))
 };
 
 export const fetchSingleReview = (review_id) => {
@@ -59,3 +60,8 @@ export const fetchReviewsComments = (review_id) => {
 export const fetchCategories = () => {
   return mainApi.get("/categories").then((data) => data.data);
 };
+
+
+export const deleteComment = (comment_id) => {
+  return mainApi.delete(`/comments/${comment_id}`).then((response) => console.log(response))
+}

@@ -1,7 +1,6 @@
 import SortbySelector from "./sortbySelector";
 import OrderBySelector from "./orderby";
 import DisplayReviews from "./displayAllReviews";
-import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import CategorySelector from "./categorySelector";
 
